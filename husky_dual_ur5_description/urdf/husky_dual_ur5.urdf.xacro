@@ -37,6 +37,10 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <xacro:include filename="$(find husky_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro"/>
   <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
 
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+
+  
+
   <xacro:property name="M_PI" value="3.14159"/>
 
   <!-- Base Size -->
@@ -128,6 +132,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <xacro:ur5_robot prefix="l_ur5_arm_" joint_limited="true"/>
   <xacro:ur5_robot prefix="r_ur5_arm_" joint_limited="true"/> 
 
+  <link name="camera_link" />
+  <xacro:sensor_d435 parent="camera_link" name="camera1" publish_pointcloud="true">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:sensor_d435>
+
+  <link name="camera_link_dummy" />
+
   <xacro:sick_lms1xx_mount prefix="base"/>
 
   <xacro:sick_lms1xx frame="base_laser" topic="scan" robot_namespace="$(arg robot_namespace)"/>
@@ -136,6 +147,23 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <origin xyz="0.46 0.0 0.1" rpy="0.0 0.0 0.0" />
     <parent link="base_link" />
     <child link="base_laser_mount" />
+  </joint>
+
+  <joint name="camera_mount_joint" type="fixed">
+    <!-- <origin rpy="1.570 0 1.57" xyz="0 0.0 -0.05"/> -->
+    <!-- <origin rpy="${M_PI} 0 0" xyz="0.02 0.0 0.0"/> -->
+    <origin rpy="0 0 0" xyz="0.08 0.0 0.0"/>
+    <!-- <origin xyz="0.46 0.0 0.3" rpy="0.0 0.0 0.0" /> -->
+    <parent link="r_ur5_arm_ee_link" />
+    <child link="camera_link" />
+  </joint>
+
+
+  <joint name="camera_mount_joint_dummy" type="fixed">
+    <origin rpy="-${M_PI/2} 0 -${M_PI/2}" xyz="0.0 0.0 0.0"/>
+    <!-- <origin xyz="0.46 0.0 0.3" rpy="0.0 0.0 0.0" /> -->
+    <parent link="camera_link" />
+    <child link="camera_link_dummy" />
   </joint>
 
 

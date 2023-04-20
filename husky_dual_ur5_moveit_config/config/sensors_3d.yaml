@@ -1,10 +1,29 @@
 # The name of this file shouldn't be changed, or else the Setup Assistant won't detect it
 sensors:
-  - filtered_cloud_topic: filtered_cloud
-    max_range: 5.0
+  - sensor_plugin: occupancy_map_monitor/DepthImageOctomapUpdater
+    image_topic: /camera/depth/image_rect_raw
+    queue_size: 5
+    near_clipping_plane_distance: 0.3
+    far_clipping_plane_distance: 5.0
+    shadow_threshold: 0.2
+    padding_scale: 4.0
+    padding_offset: 0.03
     max_update_rate: 1.0
-    padding_offset: 0.1
-    padding_scale: 1.0
-    point_cloud_topic: /head_mount_kinect/depth_registered/points
-    point_subsample: 1
-    sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
+    filtered_cloud_topic: filtered_cloud
+
+camera:
+    # frame_id: camera_depth_optical_frame
+    frame_id: camera_frame
+    info_topic: /camera/depth/camera_info
+    depth_topic: /camera/depth/image_rect_raw
+    min_z_dist: 0.3
+
+tsdf_server:
+  frame_id: task
+  length: 0.3
+  resolution: 40
+  depth_scaling: 0.001  # Set to 1.0 for Gazebo, 0.001 for a RealSense
+  camera:
+    frame_id: camera_frame
+    info_topic: /camera/depth/camera_info
+    depth_topic: /camera/depth/image_rect_raw

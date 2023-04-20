@@ -32,6 +32,22 @@
         <joint name="r_ur5_arm_wrist_2_joint" value="0" />
         <joint name="r_ur5_arm_wrist_3_joint" value="0" />
     </group_state>
+    <group_state name="r_arm_start" group="r_arm">
+        <joint name="r_ur5_arm_elbow_joint" value="-1.74" />
+        <joint name="r_ur5_arm_shoulder_lift_joint" value="-0.1184" />
+        <joint name="r_ur5_arm_shoulder_pan_joint" value="-1.0456" />
+        <joint name="r_ur5_arm_wrist_1_joint" value="-1.92" />
+        <joint name="r_ur5_arm_wrist_2_joint" value="1.356" />
+        <joint name="r_ur5_arm_wrist_3_joint" value="0.2386" />
+    </group_state>
+    <group_state name="r_arm_next" group="r_arm">
+        <joint name="r_ur5_arm_elbow_joint" value="-1.197" />
+        <joint name="r_ur5_arm_shoulder_lift_joint" value="-1.296" />
+        <joint name="r_ur5_arm_shoulder_pan_joint" value="-1.345" />
+        <joint name="r_ur5_arm_wrist_1_joint" value="-1.724" />
+        <joint name="r_ur5_arm_wrist_2_joint" value="1.6236" />
+        <joint name="r_ur5_arm_wrist_3_joint" value="0.0431" />
+    </group_state>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="base_laser" link2="base_laser_mount" reason="Adjacent" />
     <disable_collisions link1="base_laser" link2="base_link" reason="Never" />
